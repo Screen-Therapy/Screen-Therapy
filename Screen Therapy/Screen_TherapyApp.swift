@@ -6,12 +6,28 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 @main
 struct Screen_TherapyApp: App {
+    let center = AuthorizationCenter.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VStack {
+                ContentView()
+            }
+            .onAppear {
+                Task {
+                    do {
+                        try await center.requestAuthorization(for: .individual)
+                        print("Authorization request successful.")
+                    } catch {
+                        print("Failed to enroll user with error: \(error.localizedDescription)")
+                    }
+                }
+            }
         }
     }
 }
+

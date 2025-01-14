@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1835AC252D36CDE400F3678F /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC242D36CDE400F3678F /* FamilyControls.framework */; };
+		1835AC272D36CDEC00F3678F /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC262D36CDEC00F3678F /* ManagedSettings.framework */; };
+		1835AC292D36CDF300F3678F /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC282D36CDF300F3678F /* DeviceActivity.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1835AC062D36CD7C00F3678F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +33,9 @@
 		1835ABF52D36CD7900F3678F /* Screen Therapy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Screen Therapy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1835AC052D36CD7C00F3678F /* Screen TherapyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Screen TherapyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Screen TherapyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1835AC242D36CDE400F3678F /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
+		1835AC262D36CDEC00F3678F /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		1835AC282D36CDF300F3678F /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +61,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1835AC292D36CDF300F3678F /* DeviceActivity.framework in Frameworks */,
+				1835AC272D36CDEC00F3678F /* ManagedSettings.framework in Frameworks */,
+				1835AC252D36CDE400F3678F /* FamilyControls.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +90,7 @@
 				1835ABF72D36CD7900F3678F /* Screen Therapy */,
 				1835AC082D36CD7C00F3678F /* Screen TherapyTests */,
 				1835AC122D36CD7C00F3678F /* Screen TherapyUITests */,
+				1835AC232D36CDE400F3678F /* Frameworks */,
 				1835ABF62D36CD7900F3678F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +103,16 @@
 				1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1835AC232D36CDE400F3678F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1835AC282D36CDF300F3678F /* DeviceActivity.framework */,
+				1835AC262D36CDEC00F3678F /* ManagedSettings.framework */,
+				1835AC242D36CDE400F3678F /* FamilyControls.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Screen Therapy/Screen TherapyDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Screen Therapy/Preview Content\"";
