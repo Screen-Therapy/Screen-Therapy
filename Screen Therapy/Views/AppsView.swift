@@ -35,18 +35,11 @@ struct AppsView: View {
                         .shadow(color: Color("SecondaryPurple").opacity(0.4), radius: 5, x: 0, y: 3)
                 }
                 .familyActivityPicker(isPresented: $isPresented, selection: $familyActivityModel.selectionToDiscourage)
-
-                // Show ShieldSettingsView as a Popup
-                Button(action: {
-                    showShieldSettings = true
-                }) {
-                    Text("Go to Shield Settings")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color("SecondaryPurple"))
-                        .cornerRadius(10)
+                .onChange(of: isPresented) { newValue in
+                    if !newValue && !familyActivityModel.selectionToDiscourage.applications.isEmpty {
+                        // When picker is dismissed and apps are selected
+                        showShieldSettings = true
+                    }
                 }
 
                 Spacer()
