@@ -11,15 +11,17 @@ import FamilyControls
 struct AppsView: View {
     @StateObject var familyActivityModel = FamilyActivityModel()
     @State private var isPresented = false
+    @State private var showShieldSettings = false // State to show/hide the popup
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) { // Add spacing between elements
+            VStack(spacing: 20) {
                 Text("Screen Therapy")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(Color("PrimaryPurple")) // Use PrimaryPurple
+                    .foregroundColor(Color("PrimaryPurple"))
 
+                // Family Activity Picker Button
                 Button(action: {
                     isPresented = true
                 }) {
@@ -27,18 +29,34 @@ struct AppsView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(maxWidth: .infinity) // Full-width button
+                        .frame(maxWidth: .infinity)
                         .background(Color("PrimaryPurple"))
-                        .cornerRadius(10) // Rounded corners
-                        .shadow(color: Color("SecondaryPurple").opacity(0.4), radius: 5, x: 0, y: 3) // Add shadow
+                        .cornerRadius(10)
+                        .shadow(color: Color("SecondaryPurple").opacity(0.4), radius: 5, x: 0, y: 3)
                 }
                 .familyActivityPicker(isPresented: $isPresented, selection: $familyActivityModel.selectionToDiscourage)
 
-                Spacer() // Push the content upwards
+                // Show ShieldSettingsView as a Popup
+                Button(action: {
+                    showShieldSettings = true
+                }) {
+                    Text("Go to Shield Settings")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("SecondaryPurple"))
+                        .cornerRadius(10)
+                }
+
+                Spacer()
             }
             .padding()
-            .background(Color("SecondaryPurple").opacity(0.1).edgesIgnoringSafeArea(.all)) // Light background tint
+            .background(Color("SecondaryPurple").opacity(0.1).edgesIgnoringSafeArea(.all))
             .navigationTitle("Apps")
+            .sheet(isPresented: $showShieldSettings) {
+                ShieldSettingsView(familyActivityModel: familyActivityModel)
+            }
         }
     }
 }
