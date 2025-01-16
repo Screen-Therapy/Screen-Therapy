@@ -8,7 +8,8 @@
 import SwiftUI
 import FamilyControls
 import ManagedSettings
-
+import ManagedSettingsUI
+import UIKit
 
 struct ShieldSettingsView: View {
     @ObservedObject var familyActivityModel: FamilyActivityModel
@@ -61,6 +62,21 @@ struct ShieldSettingsView: View {
 }
 
 
+class STShieldConfigurationExtension: ShieldConfigurationDataSource {
+    override func configuration(shielding application: Application) -> ShieldConfiguration {
+
+        return ShieldConfiguration(
+            backgroundBlurStyle: UIBlurEffect.Style.systemMaterialLight,
+            backgroundColor: UIColor(red: 0.71, green: 0.66, blue: 0.98, alpha: 1.00),
+            icon: UIImage(named: "ShieldLogo"),
+            title: ShieldConfiguration.Label(text: "Life is short.", color: .black),
+            subtitle: ShieldConfiguration.Label(text: "But if you wanna use this app, let’s make sure to pay.", color: .black),
+            primaryButtonLabel: ShieldConfiguration.Label(text: "Thanks!", color: .white),
+            primaryButtonBackgroundColor: UIColor.black,
+            secondaryButtonLabel: ShieldConfiguration.Label(text: "Break 👀", color: .black)
+        )
+    }
+}
 #Preview {
     let mockModel = FamilyActivityModel()
     return ShieldSettingsView(familyActivityModel: mockModel)

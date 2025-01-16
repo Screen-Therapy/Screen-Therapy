@@ -7,15 +7,18 @@
 
 import SwiftUI
 import FamilyControls
+import ManagedSettings
+import ManagedSettingsUI
+
 
 @main
 struct Screen_TherapyApp: App {
     let center = AuthorizationCenter.shared
-
+    
     var body: some Scene {
         WindowGroup {
             VStack {
-                ContentView()
+                WelcomeView()
             }
             .onAppear {
                 Task {
