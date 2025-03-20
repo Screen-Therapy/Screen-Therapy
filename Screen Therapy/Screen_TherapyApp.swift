@@ -9,17 +9,26 @@ import SwiftUI
 import FamilyControls
 import ManagedSettings
 import ManagedSettingsUI
-
+import Firebase
 
 @main
 struct Screen_TherapyApp: App {
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = UIColor(named: "AccentPurple2") // Custom color
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        FirebaseApp.configure()
+       }
+  
     let center = AuthorizationCenter.shared
-    
+
     var body: some Scene {
         WindowGroup {
             VStack {
                 WelcomeView()
             }
+            
             .onAppear {
                 Task {
                     do {
@@ -33,4 +42,3 @@ struct Screen_TherapyApp: App {
         }
     }
 }
-

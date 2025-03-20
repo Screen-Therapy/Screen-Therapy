@@ -10,6 +10,12 @@ import FamilyControls
 import ManagedSettings
 import ManagedSettingsUI
 import UIKit
+import Foundation
+import DeviceActivity
+
+extension ManagedSettingsStore.Name {
+    static let shared = Self("social")
+}
 
 struct ShieldSettingsView: View {
     @ObservedObject var familyActivityModel: FamilyActivityModel
@@ -26,8 +32,8 @@ struct ShieldSettingsView: View {
 
             Text("Websites Selected: \(familyActivityModel.selectionToDiscourage.webDomains.count)")
                 .font(.headline)
-            
-            Button("Shield"){
+
+            Button("Shield") {
                 shieldSelectedApplications()
             }
             .font(.headline)
@@ -52,32 +58,55 @@ struct ShieldSettingsView: View {
     }
 
     @Environment(\.dismiss) var dismiss
-    
-    func shieldSelectedApplications(){
-        let selectedApplicationsTokens = familyActivityModel.selectionToDiscourage.applicationTokens
-                let store = ManagedSettingsStore()
 
-                store.shield.applications = selectedApplicationsTokens
+    func shieldSelectedApplications() {
+        let store = ManagedSettingsStore(named: .shared)
+
+        // Apply shield settings for selected applications
+        let selectedApplicationsTokens = familyActivityModel.selectionToDiscourage.applicationTokens
+        store.shield.applications = selectedApplicationsTokens
+
+        // Apply shield settings for selected web domains
+        let selectedWebDomains = familyActivityModel.selectionToDiscourage.webDomainTokens
+        store.shield.webDomains = selectedWebDomains
+
+        // Optional: Add logging or feedback for debugging
+        print("Shield settings applied for apps: \(selectedApplicationsTokens)")
+        print("Shield settings applied for websites: \(selectedWebDomains)")
     }
 }
 
+// Custom ShieldConfigurationDataSource for UI presentation
+class ShieldConfigurationExtension: ShieldConfigurationDataSource {
+    static let shared = ShieldConfigurationExtension()
 
-class STShieldConfigurationExtension: ShieldConfigurationDataSource {
     override func configuration(shielding application: Application) -> ShieldConfiguration {
-
         return ShieldConfiguration(
-            backgroundBlurStyle: UIBlurEffect.Style.systemMaterialLight,
-            backgroundColor: UIColor(red: 0.71, green: 0.66, blue: 0.98, alpha: 1.00),
-            icon: UIImage(named: "ShieldLogo"),
-            title: ShieldConfiguration.Label(text: "Life is short.", color: .black),
-            subtitle: ShieldConfiguration.Label(text: "But if you wanna use this app, let’s make sure to pay.", color: .black),
-            primaryButtonLabel: ShieldConfiguration.Label(text: "Thanks!", color: .white),
-            primaryButtonBackgroundColor: UIColor.black,
-            secondaryButtonLabel: ShieldConfiguration.Label(text: "Break 👀", color: .black)
+            backgroundBlurStyle: .systemThickMaterial,
+            backgroundColor: UIColor.white,
+            icon: UIImage(systemName: "stopwatch"),
+            title: ShieldConfiguration.Label(text: "No app for you", color: .yellow),
+            subtitle: ShieldConfiguration.Label(text: "Sorry, no apps for you", color: .white),
+            primaryButtonLabel: ShieldConfiguration.Label(text: "Ask for a break?", color: .white),
+            secondaryButtonLabel: ShieldConfiguration.Label(text: "Quick Quick", color: .white)
+        )
+    }
+
+    override func configuration(shielding webDomain: WebDomain) -> ShieldConfiguration {
+        return ShieldConfiguration(
+            backgroundBlurStyle: .systemThickMaterial,
+            backgroundColor: UIColor.white,
+            icon: UIImage(systemName: "stopwatch"),
+            title: ShieldConfiguration.Label(text: "No website for you", color: .yellow),
+            subtitle: ShieldConfiguration.Label(text: "Access denied", color: .white),
+            primaryButtonLabel: ShieldConfiguration.Label(text: "Ask for access?", color: .white),
+            secondaryButtonLabel: ShieldConfiguration.Label(text: "Maybe later", color: .white)
         )
     }
 }
+
 #Preview {
     let mockModel = FamilyActivityModel()
     return ShieldSettingsView(familyActivityModel: mockModel)
 }
+

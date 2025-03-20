@@ -9,23 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            AppsView()
-                .tabItem {
-                    Label("Apps", systemImage: "app.fill")
-                }
-            
-            ReportsView()
-                .tabItem {
-                    Label("Report", systemImage: "chart.bar.fill")
-                }
-            
-            OptionsView()
-                .tabItem {
-                    Label("Options", systemImage: "gearshape.fill")
-                }
+        ZStack {
+            TabView {
+                AppsView()
+                    .tabItem {
+                        Label("Apps", systemImage: "app.fill")
+                    }
+                
+                ReportsView()
+                    .tabItem {
+                        Label("Report", systemImage: "chart.bar.fill")
+                    }
+                
+                OptionsView()
+                    .tabItem {
+                        Label("Options", systemImage: "gearshape.fill")
+                    }
+            }
+            .accentColor(Color("AccentPurple"))
         }
-        .accentColor(Color("PrimaryPurple")) // Set the tab bar accent color
     }
 }
 

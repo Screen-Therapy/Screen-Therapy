@@ -9,6 +9,8 @@ import SwiftUI
 struct WelcomeView: View {
     @State private var currentPage = 0
     @State private var timer: Timer? = nil
+    @State private var navigateToMainApp = false
+
 
     var body: some View {
         NavigationStack {
@@ -61,17 +63,24 @@ struct WelcomeView: View {
 
                 // Buttons
                 VStack(spacing: 16) {
-                    NavigationLink(destination: ContentView()) {
-                        Text("Get Started")
-                            .font(.title2)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color("WelcomeColor"))
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                    }
+                    
+                    Button("Get Started") {
+                       navigateToMainApp = true
+                   }
+                    .font(.title2)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color("WelcomeColor"))
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
                     .padding(.horizontal, 20)
-
+    
+                   .navigationDestination(isPresented: $navigateToMainApp) {
+                       ContentView()
+                           .navigationBarBackButtonHidden(true)
+                           .navigationBarHidden(true)
+                   }
+                    
                     Button(action: {
                         print("Already have an account tapped")
                     }) {

@@ -11,6 +11,11 @@
 		1835AC272D36CDEC00F3678F /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC262D36CDEC00F3678F /* ManagedSettings.framework */; };
 		1835AC292D36CDF300F3678F /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC282D36CDF300F3678F /* DeviceActivity.framework */; };
 		1835AC4B2D3833AA00F3678F /* ScreenTherapyShield.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		186BA7972D8BAB2D00D5B2A3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 186BA7962D8BAB2D00D5B2A3 /* .gitignore */; };
+		188853A22D3AC18D009C3469 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC262D36CDEC00F3678F /* ManagedSettings.framework */; };
+		188853A42D3AC18D009C3469 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188853A32D3AC18D009C3469 /* ManagedSettingsUI.framework */; };
+		188853AC2D3AC18D009C3469 /* ShieldConfig.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 188853A12D3AC18D009C3469 /* ShieldConfig.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		18D402BD2D40026100D15A66 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 18D402BC2D40026100D15A66 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +40,13 @@
 			remoteGlobalIDString = 1835AC412D3833A900F3678F;
 			remoteInfo = ScreenTherapyShield;
 		};
+		188853AA2D3AC18D009C3469 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1835ABED2D36CD7900F3678F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 188853A02D3AC18D009C3469;
+			remoteInfo = ShieldConfig;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +61,17 @@
 			name = "Embed ExtensionKit Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		188853B12D3AC18D009C3469 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				188853AC2D3AC18D009C3469 /* ShieldConfig.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +82,9 @@
 		1835AC262D36CDEC00F3678F /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		1835AC282D36CDF300F3678F /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
 		1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = ScreenTherapyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		186BA7962D8BAB2D00D5B2A3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		188853A12D3AC18D009C3469 /* ShieldConfig.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfig.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		188853A32D3AC18D009C3469 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -68,6 +94,13 @@
 				Info.plist,
 			);
 			target = 1835AC412D3833A900F3678F /* ScreenTherapyShield */;
+		};
+		188853AD2D3AC18D009C3469 /* Exceptions for "ShieldConfig" folder in "ShieldConfig" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 188853A02D3AC18D009C3469 /* ShieldConfig */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -95,6 +128,14 @@
 			path = ScreenTherapyShield;
 			sourceTree = "<group>";
 		};
+		188853A52D3AC18D009C3469 /* ShieldConfig */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				188853AD2D3AC18D009C3469 /* Exceptions for "ShieldConfig" folder in "ShieldConfig" target */,
+			);
+			path = ShieldConfig;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +146,7 @@
 				1835AC292D36CDF300F3678F /* DeviceActivity.framework in Frameworks */,
 				1835AC272D36CDEC00F3678F /* ManagedSettings.framework in Frameworks */,
 				1835AC252D36CDE400F3678F /* FamilyControls.framework in Frameworks */,
+				18D402BD2D40026100D15A66 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,16 +171,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1888539E2D3AC18D009C3469 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				188853A22D3AC18D009C3469 /* ManagedSettings.framework in Frameworks */,
+				188853A42D3AC18D009C3469 /* ManagedSettingsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1835ABEC2D36CD7900F3678F = {
 			isa = PBXGroup;
 			children = (
+				186BA7962D8BAB2D00D5B2A3 /* .gitignore */,
 				1835ABF72D36CD7900F3678F /* Screen Therapy */,
 				1835AC082D36CD7C00F3678F /* Screen TherapyTests */,
 				1835AC122D36CD7C00F3678F /* Screen TherapyUITests */,
 				1835AC432D3833AA00F3678F /* ScreenTherapyShield */,
+				188853A52D3AC18D009C3469 /* ShieldConfig */,
 				1835AC232D36CDE400F3678F /* Frameworks */,
 				1835ABF62D36CD7900F3678F /* Products */,
 			);
@@ -151,6 +204,7 @@
 				1835AC052D36CD7C00F3678F /* Screen TherapyTests.xctest */,
 				1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */,
 				1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */,
+				188853A12D3AC18D009C3469 /* ShieldConfig.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +215,7 @@
 				1835AC282D36CDF300F3678F /* DeviceActivity.framework */,
 				1835AC262D36CDEC00F3678F /* ManagedSettings.framework */,
 				1835AC242D36CDE400F3678F /* FamilyControls.framework */,
+				188853A32D3AC18D009C3469 /* ManagedSettingsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,17 +231,20 @@
 				1835ABF22D36CD7900F3678F /* Frameworks */,
 				1835ABF32D36CD7900F3678F /* Resources */,
 				1835AC502D3833AA00F3678F /* Embed ExtensionKit Extensions */,
+				188853B12D3AC18D009C3469 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				1835AC4A2D3833AA00F3678F /* PBXTargetDependency */,
+				188853AB2D3AC18D009C3469 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				1835ABF72D36CD7900F3678F /* Screen Therapy */,
 			);
 			name = "Screen Therapy";
 			packageProductDependencies = (
+				18D402BC2D40026100D15A66 /* FirebaseAuth */,
 			);
 			productName = "Screen Therapy";
 			productReference = 1835ABF52D36CD7900F3678F /* Screen Therapy.app */;
@@ -260,6 +318,28 @@
 			productReference = 1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */;
 			productType = "com.apple.product-type.extensionkit-extension";
 		};
+		188853A02D3AC18D009C3469 /* ShieldConfig */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 188853AE2D3AC18D009C3469 /* Build configuration list for PBXNativeTarget "ShieldConfig" */;
+			buildPhases = (
+				1888539D2D3AC18D009C3469 /* Sources */,
+				1888539E2D3AC18D009C3469 /* Frameworks */,
+				1888539F2D3AC18D009C3469 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				188853A52D3AC18D009C3469 /* ShieldConfig */,
+			);
+			name = ShieldConfig;
+			packageProductDependencies = (
+			);
+			productName = ShieldConfig;
+			productReference = 188853A12D3AC18D009C3469 /* ShieldConfig.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -284,6 +364,9 @@
 					1835AC412D3833A900F3678F = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					188853A02D3AC18D009C3469 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = 1835ABF02D36CD7900F3678F /* Build configuration list for PBXProject "Screen Therapy" */;
@@ -295,6 +378,9 @@
 			);
 			mainGroup = 1835ABEC2D36CD7900F3678F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				18D402BB2D40023400D15A66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1835ABF62D36CD7900F3678F /* Products */;
 			projectDirPath = "";
@@ -304,6 +390,7 @@
 				1835AC042D36CD7C00F3678F /* Screen TherapyTests */,
 				1835AC0E2D36CD7C00F3678F /* Screen TherapyUITests */,
 				1835AC412D3833A900F3678F /* ScreenTherapyShield */,
+				188853A02D3AC18D009C3469 /* ShieldConfig */,
 			);
 		};
 /* End PBXProject section */
@@ -313,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186BA7972D8BAB2D00D5B2A3 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +419,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1835AC402D3833A900F3678F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1888539F2D3AC18D009C3469 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -368,6 +463,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1888539D2D3AC18D009C3469 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -385,6 +487,11 @@
 			isa = PBXTargetDependency;
 			target = 1835AC412D3833A900F3678F /* ScreenTherapyShield */;
 			targetProxy = 1835AC492D3833AA00F3678F /* PBXContainerItemProxy */;
+		};
+		188853AB2D3AC18D009C3469 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 188853A02D3AC18D009C3469 /* ShieldConfig */;
+			targetProxy = 188853AA2D3AC18D009C3469 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -525,11 +632,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -554,11 +663,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -689,6 +800,58 @@
 			};
 			name = Release;
 		};
+		188853AF2D3AC18D009C3469 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfigDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84MW3W3SX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldConfig/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfig;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ShieldConfig";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		188853B02D3AC18D009C3469 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfig.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84MW3W3SX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldConfig/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfig;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ShieldConfig";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -737,7 +900,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		188853AE2D3AC18D009C3469 /* Build configuration list for PBXNativeTarget "ShieldConfig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				188853AF2D3AC18D009C3469 /* Debug */,
+				188853B02D3AC18D009C3469 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18D402BB2D40023400D15A66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18D402BC2D40026100D15A66 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18D402BB2D40023400D15A66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1835ABED2D36CD7900F3678F /* Project object */;
 }
