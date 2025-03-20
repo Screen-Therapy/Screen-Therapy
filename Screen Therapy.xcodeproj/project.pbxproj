@@ -110,16 +110,6 @@
 			path = "Screen Therapy";
 			sourceTree = "<group>";
 		};
-		1835AC082D36CD7C00F3678F /* Screen TherapyTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Screen TherapyTests";
-			sourceTree = "<group>";
-		};
-		1835AC122D36CD7C00F3678F /* Screen TherapyUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Screen TherapyUITests";
-			sourceTree = "<group>";
-		};
 		1835AC432D3833AA00F3678F /* ScreenTherapyShield */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -188,8 +178,6 @@
 			children = (
 				186BA7962D8BAB2D00D5B2A3 /* .gitignore */,
 				1835ABF72D36CD7900F3678F /* Screen Therapy */,
-				1835AC082D36CD7C00F3678F /* Screen TherapyTests */,
-				1835AC122D36CD7C00F3678F /* Screen TherapyUITests */,
 				1835AC432D3833AA00F3678F /* ScreenTherapyShield */,
 				188853A52D3AC18D009C3469 /* ShieldConfig */,
 				1835AC232D36CDE400F3678F /* Frameworks */,
@@ -263,9 +251,6 @@
 			dependencies = (
 				1835AC072D36CD7C00F3678F /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				1835AC082D36CD7C00F3678F /* Screen TherapyTests */,
-			);
 			name = "Screen TherapyTests";
 			packageProductDependencies = (
 			);
@@ -285,9 +270,6 @@
 			);
 			dependencies = (
 				1835AC112D36CD7C00F3678F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1835AC122D36CD7C00F3678F /* Screen TherapyUITests */,
 			);
 			name = "Screen TherapyUITests";
 			packageProductDependencies = (
