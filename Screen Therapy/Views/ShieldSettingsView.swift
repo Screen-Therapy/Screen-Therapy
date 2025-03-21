@@ -76,37 +76,7 @@ struct ShieldSettingsView: View {
     }
 }
 
-// Custom ShieldConfigurationDataSource for UI presentation
-class ShieldConfigurationExtension: ShieldConfigurationDataSource {
-    static let shared = ShieldConfigurationExtension()
-
-    override func configuration(shielding application: Application) -> ShieldConfiguration {
-        return ShieldConfiguration(
-            backgroundBlurStyle: .systemThickMaterial,
-            backgroundColor: UIColor.white,
-            icon: UIImage(systemName: "stopwatch"),
-            title: ShieldConfiguration.Label(text: "No app for you", color: .yellow),
-            subtitle: ShieldConfiguration.Label(text: "Sorry, no apps for you", color: .white),
-            primaryButtonLabel: ShieldConfiguration.Label(text: "Ask for a break?", color: .white),
-            secondaryButtonLabel: ShieldConfiguration.Label(text: "Quick Quick", color: .white)
-        )
-    }
-
-    override func configuration(shielding webDomain: WebDomain) -> ShieldConfiguration {
-        return ShieldConfiguration(
-            backgroundBlurStyle: .systemThickMaterial,
-            backgroundColor: UIColor.white,
-            icon: UIImage(systemName: "stopwatch"),
-            title: ShieldConfiguration.Label(text: "No website for you", color: .yellow),
-            subtitle: ShieldConfiguration.Label(text: "Access denied", color: .white),
-            primaryButtonLabel: ShieldConfiguration.Label(text: "Ask for access?", color: .white),
-            secondaryButtonLabel: ShieldConfiguration.Label(text: "Maybe later", color: .white)
-        )
-    }
-}
-
 #Preview {
     let mockModel = FamilyActivityModel()
     return ShieldSettingsView(familyActivityModel: mockModel)
 }
-
