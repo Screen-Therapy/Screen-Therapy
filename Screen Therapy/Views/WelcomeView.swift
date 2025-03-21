@@ -76,7 +76,7 @@ struct WelcomeView: View {
                     .padding(.horizontal, 20)
     
                    .navigationDestination(isPresented: $navigateToMainApp) {
-                       ContentView()
+                       SignInView()
                            .navigationBarBackButtonHidden(true)
                            .navigationBarHidden(true)
                    }

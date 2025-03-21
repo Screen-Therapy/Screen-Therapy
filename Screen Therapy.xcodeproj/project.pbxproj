@@ -10,44 +10,9 @@
 		1835AC252D36CDE400F3678F /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC242D36CDE400F3678F /* FamilyControls.framework */; };
 		1835AC272D36CDEC00F3678F /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC262D36CDEC00F3678F /* ManagedSettings.framework */; };
 		1835AC292D36CDF300F3678F /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC282D36CDF300F3678F /* DeviceActivity.framework */; };
-		1835AC4B2D3833AA00F3678F /* ScreenTherapyShield.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		186BA7972D8BAB2D00D5B2A3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 186BA7962D8BAB2D00D5B2A3 /* .gitignore */; };
-		188853A22D3AC18D009C3469 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1835AC262D36CDEC00F3678F /* ManagedSettings.framework */; };
-		188853A42D3AC18D009C3469 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188853A32D3AC18D009C3469 /* ManagedSettingsUI.framework */; };
-		188853AC2D3AC18D009C3469 /* ShieldConfig.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 188853A12D3AC18D009C3469 /* ShieldConfig.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18D402BD2D40026100D15A66 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 18D402BC2D40026100D15A66 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1835AC062D36CD7C00F3678F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1835ABED2D36CD7900F3678F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1835ABF42D36CD7900F3678F;
-			remoteInfo = "Screen Therapy";
-		};
-		1835AC102D36CD7C00F3678F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1835ABED2D36CD7900F3678F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1835ABF42D36CD7900F3678F;
-			remoteInfo = "Screen Therapy";
-		};
-		1835AC492D3833AA00F3678F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1835ABED2D36CD7900F3678F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1835AC412D3833A900F3678F;
-			remoteInfo = ScreenTherapyShield;
-		};
-		188853AA2D3AC18D009C3469 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1835ABED2D36CD7900F3678F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 188853A02D3AC18D009C3469;
-			remoteInfo = ShieldConfig;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1835AC502D3833AA00F3678F /* Embed ExtensionKit Extensions */ = {
@@ -56,7 +21,6 @@
 			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
 			dstSubfolderSpec = 16;
 			files = (
-				1835AC4B2D3833AA00F3678F /* ScreenTherapyShield.appex in Embed ExtensionKit Extensions */,
 			);
 			name = "Embed ExtensionKit Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,7 +31,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				188853AC2D3AC18D009C3469 /* ShieldConfig.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,53 +39,26 @@
 
 /* Begin PBXFileReference section */
 		1835ABF52D36CD7900F3678F /* Screen Therapy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Screen Therapy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1835AC052D36CD7C00F3678F /* Screen TherapyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Screen TherapyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Screen TherapyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1835AC242D36CDE400F3678F /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		1835AC262D36CDEC00F3678F /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		1835AC282D36CDF300F3678F /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
-		1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = ScreenTherapyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		186BA7962D8BAB2D00D5B2A3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		188853A12D3AC18D009C3469 /* ShieldConfig.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfig.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		188853A32D3AC18D009C3469 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1835AC4C2D3833AA00F3678F /* Exceptions for "ScreenTherapyShield" folder in "ScreenTherapyShield" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 1835AC412D3833A900F3678F /* ScreenTherapyShield */;
-		};
-		188853AD2D3AC18D009C3469 /* Exceptions for "ShieldConfig" folder in "ShieldConfig" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 188853A02D3AC18D009C3469 /* ShieldConfig */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1835ABF72D36CD7900F3678F /* Screen Therapy */ = {
+		1835AC432D3833AA00F3678F /* ScreenTherapyShield */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScreenTherapyShield;
+			sourceTree = "<group>";
+		};
+		186BA7D42D8C99D900D5B2A3 /* Screen Therapy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Screen Therapy";
 			sourceTree = "<group>";
 		};
-		1835AC432D3833AA00F3678F /* ScreenTherapyShield */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				1835AC4C2D3833AA00F3678F /* Exceptions for "ScreenTherapyShield" folder in "ScreenTherapyShield" target */,
-			);
-			path = ScreenTherapyShield;
-			sourceTree = "<group>";
-		};
 		188853A52D3AC18D009C3469 /* ShieldConfig */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				188853AD2D3AC18D009C3469 /* Exceptions for "ShieldConfig" folder in "ShieldConfig" target */,
-			);
 			path = ShieldConfig;
 			sourceTree = "<group>";
 		};
@@ -140,44 +76,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1835AC022D36CD7C00F3678F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC0C2D36CD7C00F3678F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC3F2D3833A900F3678F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1888539E2D3AC18D009C3469 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				188853A22D3AC18D009C3469 /* ManagedSettings.framework in Frameworks */,
-				188853A42D3AC18D009C3469 /* ManagedSettingsUI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1835ABEC2D36CD7900F3678F = {
 			isa = PBXGroup;
 			children = (
+				186BA7D42D8C99D900D5B2A3 /* Screen Therapy */,
 				186BA7962D8BAB2D00D5B2A3 /* .gitignore */,
-				1835ABF72D36CD7900F3678F /* Screen Therapy */,
 				1835AC432D3833AA00F3678F /* ScreenTherapyShield */,
 				188853A52D3AC18D009C3469 /* ShieldConfig */,
 				1835AC232D36CDE400F3678F /* Frameworks */,
@@ -189,10 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				1835ABF52D36CD7900F3678F /* Screen Therapy.app */,
-				1835AC052D36CD7C00F3678F /* Screen TherapyTests.xctest */,
-				1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */,
-				1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */,
-				188853A12D3AC18D009C3469 /* ShieldConfig.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,11 +126,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				1835AC4A2D3833AA00F3678F /* PBXTargetDependency */,
-				188853AB2D3AC18D009C3469 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				1835ABF72D36CD7900F3678F /* Screen Therapy */,
+				186BA7D42D8C99D900D5B2A3 /* Screen Therapy */,
 			);
 			name = "Screen Therapy";
 			packageProductDependencies = (
@@ -237,90 +137,6 @@
 			productName = "Screen Therapy";
 			productReference = 1835ABF52D36CD7900F3678F /* Screen Therapy.app */;
 			productType = "com.apple.product-type.application";
-		};
-		1835AC042D36CD7C00F3678F /* Screen TherapyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1835AC1C2D36CD7C00F3678F /* Build configuration list for PBXNativeTarget "Screen TherapyTests" */;
-			buildPhases = (
-				1835AC012D36CD7C00F3678F /* Sources */,
-				1835AC022D36CD7C00F3678F /* Frameworks */,
-				1835AC032D36CD7C00F3678F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1835AC072D36CD7C00F3678F /* PBXTargetDependency */,
-			);
-			name = "Screen TherapyTests";
-			packageProductDependencies = (
-			);
-			productName = "Screen TherapyTests";
-			productReference = 1835AC052D36CD7C00F3678F /* Screen TherapyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1835AC0E2D36CD7C00F3678F /* Screen TherapyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1835AC1F2D36CD7C00F3678F /* Build configuration list for PBXNativeTarget "Screen TherapyUITests" */;
-			buildPhases = (
-				1835AC0B2D36CD7C00F3678F /* Sources */,
-				1835AC0C2D36CD7C00F3678F /* Frameworks */,
-				1835AC0D2D36CD7C00F3678F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1835AC112D36CD7C00F3678F /* PBXTargetDependency */,
-			);
-			name = "Screen TherapyUITests";
-			packageProductDependencies = (
-			);
-			productName = "Screen TherapyUITests";
-			productReference = 1835AC0F2D36CD7C00F3678F /* Screen TherapyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		1835AC412D3833A900F3678F /* ScreenTherapyShield */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1835AC4D2D3833AA00F3678F /* Build configuration list for PBXNativeTarget "ScreenTherapyShield" */;
-			buildPhases = (
-				1835AC3E2D3833A900F3678F /* Sources */,
-				1835AC3F2D3833A900F3678F /* Frameworks */,
-				1835AC402D3833A900F3678F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1835AC432D3833AA00F3678F /* ScreenTherapyShield */,
-			);
-			name = ScreenTherapyShield;
-			packageProductDependencies = (
-			);
-			productName = ScreenTherapyShield;
-			productReference = 1835AC422D3833A900F3678F /* ScreenTherapyShield.appex */;
-			productType = "com.apple.product-type.extensionkit-extension";
-		};
-		188853A02D3AC18D009C3469 /* ShieldConfig */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 188853AE2D3AC18D009C3469 /* Build configuration list for PBXNativeTarget "ShieldConfig" */;
-			buildPhases = (
-				1888539D2D3AC18D009C3469 /* Sources */,
-				1888539E2D3AC18D009C3469 /* Frameworks */,
-				1888539F2D3AC18D009C3469 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				188853A52D3AC18D009C3469 /* ShieldConfig */,
-			);
-			name = ShieldConfig;
-			packageProductDependencies = (
-			);
-			productName = ShieldConfig;
-			productReference = 188853A12D3AC18D009C3469 /* ShieldConfig.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -333,20 +149,6 @@
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					1835ABF42D36CD7900F3678F = {
-						CreatedOnToolsVersion = 16.2;
-					};
-					1835AC042D36CD7C00F3678F = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 1835ABF42D36CD7900F3678F;
-					};
-					1835AC0E2D36CD7C00F3678F = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 1835ABF42D36CD7900F3678F;
-					};
-					1835AC412D3833A900F3678F = {
-						CreatedOnToolsVersion = 16.2;
-					};
-					188853A02D3AC18D009C3469 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
@@ -369,10 +171,6 @@
 			projectRoot = "";
 			targets = (
 				1835ABF42D36CD7900F3678F /* Screen Therapy */,
-				1835AC042D36CD7C00F3678F /* Screen TherapyTests */,
-				1835AC0E2D36CD7C00F3678F /* Screen TherapyUITests */,
-				1835AC412D3833A900F3678F /* ScreenTherapyShield */,
-				188853A02D3AC18D009C3469 /* ShieldConfig */,
 			);
 		};
 /* End PBXProject section */
@@ -386,34 +184,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1835AC032D36CD7C00F3678F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC0D2D36CD7C00F3678F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC402D3833A900F3678F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1888539F2D3AC18D009C3469 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -424,58 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1835AC012D36CD7C00F3678F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC0B2D36CD7C00F3678F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1835AC3E2D3833A900F3678F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1888539D2D3AC18D009C3469 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1835AC072D36CD7C00F3678F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1835ABF42D36CD7900F3678F /* Screen Therapy */;
-			targetProxy = 1835AC062D36CD7C00F3678F /* PBXContainerItemProxy */;
-		};
-		1835AC112D36CD7C00F3678F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1835ABF42D36CD7900F3678F /* Screen Therapy */;
-			targetProxy = 1835AC102D36CD7C00F3678F /* PBXContainerItemProxy */;
-		};
-		1835AC4A2D3833AA00F3678F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1835AC412D3833A900F3678F /* ScreenTherapyShield */;
-			targetProxy = 1835AC492D3833AA00F3678F /* PBXContainerItemProxy */;
-		};
-		188853AB2D3AC18D009C3469 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 188853A02D3AC18D009C3469 /* ShieldConfig */;
-			targetProxy = 188853AA2D3AC18D009C3469 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1835AC172D36CD7C00F3678F /* Debug */ = {
@@ -660,180 +379,6 @@
 			};
 			name = Release;
 		};
-		1835AC1D2D36CD7C00F3678F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-TherapyTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Screen Therapy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Screen Therapy";
-			};
-			name = Debug;
-		};
-		1835AC1E2D36CD7C00F3678F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-TherapyTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Screen Therapy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Screen Therapy";
-			};
-			name = Release;
-		};
-		1835AC202D36CD7C00F3678F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-TherapyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Screen Therapy";
-			};
-			name = Debug;
-		};
-		1835AC212D36CD7C00F3678F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-TherapyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Screen Therapy";
-			};
-			name = Release;
-		};
-		1835AC4E2D3833AA00F3678F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ScreenTherapyShield/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ScreenTherapyShield;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ScreenTherapyShield";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1835AC4F2D3833AA00F3678F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ScreenTherapyShield/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ScreenTherapyShield;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ScreenTherapyShield";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		188853AF2D3AC18D009C3469 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfigDebug.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ShieldConfig/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfig;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ShieldConfig";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		188853B02D3AC18D009C3469 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfig.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 84MW3W3SX8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ShieldConfig/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfig;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.777..Screen-Therapy.ShieldConfig";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -851,42 +396,6 @@
 			buildConfigurations = (
 				1835AC1A2D36CD7C00F3678F /* Debug */,
 				1835AC1B2D36CD7C00F3678F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1835AC1C2D36CD7C00F3678F /* Build configuration list for PBXNativeTarget "Screen TherapyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1835AC1D2D36CD7C00F3678F /* Debug */,
-				1835AC1E2D36CD7C00F3678F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1835AC1F2D36CD7C00F3678F /* Build configuration list for PBXNativeTarget "Screen TherapyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1835AC202D36CD7C00F3678F /* Debug */,
-				1835AC212D36CD7C00F3678F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1835AC4D2D3833AA00F3678F /* Build configuration list for PBXNativeTarget "ScreenTherapyShield" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1835AC4E2D3833AA00F3678F /* Debug */,
-				1835AC4F2D3833AA00F3678F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		188853AE2D3AC18D009C3469 /* Build configuration list for PBXNativeTarget "ShieldConfig" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				188853AF2D3AC18D009C3469 /* Debug */,
-				188853B02D3AC18D009C3469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
