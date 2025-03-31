@@ -9,11 +9,15 @@
 import SwiftUI
 
 struct LogoutView: View {
-    @EnvironmentObject var authManager: AuthManager // Access authentication state
+    @EnvironmentObject var authManager: AuthManager
 
     var body: some View {
         Button(action: {
-            authManager.isSignedIn = false // ✅ Logs out and goes to WelcomeView
+            // 🚫 Delete stored Apple ID from Keychain
+            KeychainItem.deleteUserIdentifier()
+
+            // 🚪 Set sign-in status to false
+            authManager.isSignedIn = false
         }) {
             HStack {
                 Spacer()
@@ -25,6 +29,7 @@ struct LogoutView: View {
         }
     }
 }
+
 
 #Preview {
     LogoutView().environmentObject(AuthManager()) // Pass mock AuthManager

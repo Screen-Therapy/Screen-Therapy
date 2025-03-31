@@ -10,6 +10,8 @@ struct WelcomeView: View {
     @State private var currentPage = 0
     @State private var timer: Timer? = nil
     @State private var navigateToMainApp = false
+    @State private var isSignUp = true
+
 
 
     var body: some View {
@@ -63,10 +65,11 @@ struct WelcomeView: View {
 
                 // Buttons
                 VStack(spacing: 16) {
-                    
+                    // Get Started → Sign Up
                     Button("Get Started") {
-                       navigateToMainApp = true
-                   }
+                        navigateToMainApp = true
+                        isSignUp = true
+                    }
                     .font(.title2)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -74,15 +77,11 @@ struct WelcomeView: View {
                     .foregroundColor(.white)
                     .cornerRadius(20)
                     .padding(.horizontal, 20)
-    
-                   .navigationDestination(isPresented: $navigateToMainApp) {
-                       SignInView()
-                           .navigationBarBackButtonHidden(true)
-                           .navigationBarHidden(true)
-                   }
-                    
+
+                    // Already have an account? → Sign In
                     Button(action: {
-                        print("Already have an account tapped")
+                        navigateToMainApp = true
+                        isSignUp = false
                     }) {
                         Text("Already have an account?")
                             .font(.headline)
@@ -90,6 +89,20 @@ struct WelcomeView: View {
                     }
                 }
                 .padding(.bottom, 20)
+
+                // Navigation
+                .navigationDestination(isPresented: $navigateToMainApp) {
+                    Group {
+                        if isSignUp {
+                            SignUpView()
+                        } else {
+                            SignInView()
+                        }
+                    }
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true)
+                }
+
             }
             .background(
                 AngularGradient(
