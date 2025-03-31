@@ -1,119 +1,170 @@
 import AuthenticationServices
 
 class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    let apiURL = "http://10.20.0.24:8080/"
+    let apiURL = "http://10.136.251.34:8080/"
 
-    func handleSignInResult(_ result: Result<ASAuthorization, Error>, completion: @escaping (Bool) -> Void) {
+    // Final result: .success means user is signed in and has a username
+    func handleSignInResult(_ result: Result<ASAuthorization, Error>, completion: @escaping (Bool, Bool) -> Void) {
         switch result {
         case .success(let authorization):
             if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
                 let userId = appleIDCredential.user
-                let fullName = "\(appleIDCredential.fullName?.givenName ?? "") \(appleIDCredential.fullName?.familyName ?? "")"
                 let email = appleIDCredential.email ?? "No email provided"
 
-                // Save user ID to Keychain
                 KeychainItem.saveUserIdentifier(userId)
 
                 print("User ID: \(userId)")
-                print("Full Name: \(fullName)")
                 print("Email: \(email)")
 
-                // 🔥 Step 1: Check if user exists in Firestore before registering
+                // Step 1: Check if user exists
                 checkIfUserExists(userId: userId) { exists in
                     if exists {
-                        print("✅ User already exists. Proceeding with sign-in...")
-                        completion(true)
+                        print("✅ Apple user exists. Checking for username...")
+                        self.checkIfUsernameExists(userId: userId) { hasUsername in
+                            completion(true, hasUsername)
+                        }
                     } else {
-                        print("🆕 User does not exist. Registering now...")
-                        self.sendUserDataToBackend(userId: userId, fullName: fullName, email: email, completion: completion)
+                        print("🆕 New Apple user. Registering...")
+                        self.registerUser(userId: userId, email: email) { success in
+                            if success {
+                                completion(true, false) // success, no username yet
+                            } else {
+                                completion(false, false)
+                            }
+                        }
                     }
                 }
             } else {
-                completion(false)
+                completion(false, false)
             }
-            
+
         case .failure(let error):
             print("Apple Sign-In failed: \(error.localizedDescription)")
-            completion(false)
+            completion(false, false)
         }
     }
 
-    // 🔍 Step 2: Check if the user exists in Firestore
+    // Updated to new backend route
     func checkIfUserExists(userId: String, completion: @escaping (Bool) -> Void) {
-        let url = URL(string: "\(apiURL)checkUser/\(userId)")! // 🔥 Use apiURL
+        guard let url = URL(string: "\(apiURL)apple/checkUser/\(userId)") else {
+            completion(false)
+            return
+        }
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { _, response, error in
             if let error = error {
-                print("❌ Error checking user: \(error.localizedDescription)")
-                completion(false) // Assume user doesn't exist on failure
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse else {
-                print("❌ Invalid server response")
+                print("❌ Error checking Apple user: \(error.localizedDescription)")
                 completion(false)
                 return
             }
 
-            if httpResponse.statusCode == 200 {
-                completion(true) // ✅ User exists
-            } else {
-                completion(false) // ❌ User does not exist
-            }
-        }
-
-        task.resume()
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            completion(status == 200)
+        }.resume()
     }
 
-    // 🔥 Step 3: Register User in Backend if They Don't Exist
-    func sendUserDataToBackend(userId: String, fullName: String, email: String, completion: @escaping (Bool) -> Void) {
-        let url = URL(string: "\(apiURL)registerUser")! // 🔥 Use apiURL
+    func checkIfUsernameExists(userId: String, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "\(apiURL)apple/checkUsername/\(userId)") else {
+            completion(false)
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("❌ Error checking username: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            completion(status == 200)
+        }.resume()
+    }
+
+    func registerUser(userId: String, email: String, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "\(apiURL)apple/register") else {
+            completion(false)
+            return
+        }
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let userData: [String: String] = [
             "userId": userId,
-            "fullName": fullName,
             "email": email
         ]
 
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: userData, options: [])
+            request.httpBody = try JSONSerialization.data(withJSONObject: userData)
         } catch {
-            print("Error encoding user data: \(error.localizedDescription)")
+            print("❌ Error encoding Apple user data: \(error.localizedDescription)")
             completion(false)
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { _, response, error in
             if let error = error {
-                print("❌ Error sending user data: \(error.localizedDescription)")
+                print("❌ Error registering Apple user: \(error.localizedDescription)")
                 completion(false)
                 return
             }
 
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("❌ Server error: Invalid response")
-                completion(false)
-                return
-            }
-
-            print("✅ User successfully registered in the backend!")
-            completion(true)
-        }
-
-        task.resume()
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            completion(status == 200)
+        }.resume()
     }
 
-    // Required function for ASAuthorizationControllerPresentationContextProviding
+    func saveUsername(userId: String, username: String, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "\(apiURL)apple/setUsername") else {
+            completion(false)
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: String] = [
+            "userId": userId,
+            "username": username
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            print("❌ Error encoding saveUsername request: \(error)")
+            completion(false)
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("❌ Error saving username: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+
+                let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+                completion(status == 200)
+            }
+        }.resume()
+    }
+
+    
+    // Required
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let windowScene = UIApplication.shared.connectedScenes
                 .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
-              let window = windowScene.windows.first(where: { $0.isKeyWindow })
-        else {
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
             fatalError("No active window found for Apple Sign-In")
         }
         return window
