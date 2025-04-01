@@ -8,8 +8,10 @@ import SwiftUI
 
 struct OptionsView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var username: String = ""
-    @State private var friendCode: String = ""
+    @EnvironmentObject var authManager: AuthManager
+    @State private var username: String = UserDefaults.standard.string(forKey: "username") ?? ""
+    @State private var friendCode: String = UserDefaults.standard.string(forKey: "friendCode") ?? ""
+    @State private var hasFetched: Bool = false
 
     var body: some View {
         NavigationView {
@@ -39,71 +41,94 @@ struct OptionsView: View {
                 }
                 .padding(.top, 50)
 
-                // MARK: - Settings List
-                List {
-                    Section(header: Text("General").foregroundColor(Color("PrimaryPurple"))) {
-                        settingsButton(title: "Appearance", icon: "paintbrush", colorScheme: colorScheme)
-                    }
-
-                    Section(header: Text("Privacy & Security").foregroundColor(Color("PrimaryPurple"))) {
-                        settingsButton(title: "Permissions", icon: "hand.raised.fill", colorScheme: colorScheme)
-                        settingsButton(title: "Blocked Users", icon: "person.crop.circle.badge.xmark", colorScheme: colorScheme)
-                    }
-
-                    Section(header: Text("Notifications").foregroundColor(Color("PrimaryPurple"))) {
-                        settingsButton(title: "Push Notifications", icon: "bell.fill", colorScheme: colorScheme)
-                    }
-
-                    Section {
-                        LogoutView()
-                    }
+                // MARK: - Settings Actions
+                VStack(spacing: 16) {
+                    settingsButton(title: "Friends List", icon: "person.2.fill", colorScheme: colorScheme)
+                    settingsButton(title: "Enter Friend Code", icon: "plus.circle.fill", colorScheme: colorScheme)
+                    settingsButton(title: "Appearance", icon: "paintbrush", colorScheme: colorScheme)
+                    settingsButton(title: "Permissions", icon: "hand.raised.fill", colorScheme: colorScheme)
+                    settingsButton(title: "Blocked Users", icon: "person.crop.circle.badge.xmark", colorScheme: colorScheme)
+                    settingsButton(title: "Push Notifications", icon: "bell.fill", colorScheme: colorScheme)
+                    logoutButton(colorScheme: colorScheme)
                 }
-                .scrollContentBackground(.hidden)
-                .background(colorScheme == .dark ? Color.black : Color.white)
-                .listStyle(.insetGrouped)
+                .padding(.horizontal)
+
+                Spacer()
             }
             .background(colorScheme == .dark ? Color.black : Color.white)
             .navigationTitle("Settings")
             .onAppear {
-                FriendsApi.shared.fetchUserDetails { fetchedUsername, fetchedCode in
-                    DispatchQueue.main.async {
-                        self.username = fetchedUsername ?? ""
-                        self.friendCode = fetchedCode ?? ""
+                if !hasFetched {
+                    FriendsApi.shared.fetchUserDetails { fetchedUsername, fetchedCode in
+                        DispatchQueue.main.async {
+                            if let fetchedUsername = fetchedUsername {
+                                self.username = fetchedUsername
+                                UserDefaults.standard.set(fetchedUsername, forKey: "username")
+                            }
+
+                            if let fetchedCode = fetchedCode {
+                                self.friendCode = fetchedCode
+                                UserDefaults.standard.set(fetchedCode, forKey: "friendCode")
+                            }
+
+                            self.hasFetched = true
+                        }
                     }
                 }
             }
         }
     }
-}
 
+    // MARK: - Reusable Primary Buttons
+    private func settingsButton(title: String, icon: String, colorScheme: ColorScheme) -> some View {
+        Button(action: {
+            // Your action here
+        }) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .foregroundColor(colorScheme == .light ? .white : Color("PrimaryPurple"))
 
-// MARK: - Reusable Button
-private func settingsButton(title: String, icon: String, colorScheme: ColorScheme) -> some View {
-    Button(action: {
-        // Your action here
-    }) {
-        HStack(spacing: 6) {
-            Image(systemName: icon)
-                .foregroundColor(colorScheme == .light ? .white : Color("PrimaryPurple"))
+                Text(title)
+                    .foregroundColor(colorScheme == .light ? .white : .gray)
 
-            Text(title)
-                .foregroundColor(colorScheme == .light ? .white : .gray)
-
-            Spacer()
+                Spacer()
+            }
+            .padding()
+            .background(
+                colorScheme == .light
+                    ? Color("PrimaryPurple")
+                    : Color(.systemGray5)
+            )
+            .cornerRadius(10)
         }
-        .padding()
-        .background(
-            colorScheme == .light
-                ? Color("PrimaryPurple")
-                : Color(.systemGray5)
-        )
-        .cornerRadius(10)
+        .buttonStyle(PlainButtonStyle())
     }
-    .buttonStyle(PlainButtonStyle()) // Keeps custom styling
-}
 
+    // MARK: - Logout Button (Secondary Styling)
+    private func logoutButton(colorScheme: ColorScheme) -> some View {
+        Button(action: {
+            KeychainItem.deleteUserIdentifier()
+            authManager.isSignedIn = false
+        }) {
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.backward.circle.fill")
+                    .foregroundColor(.white)
+
+                Text("Log Out")
+                    .foregroundColor(.white)
+
+                Spacer()
+            }
+            .padding()
+            .background(Color("SecondaryPurple"))
+            .cornerRadius(10)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
 
 #Preview {
     OptionsView()
-        .environment(\.colorScheme, .dark) // Toggle between .light or .dark
+        .environment(\.colorScheme, .dark)
+        .environmentObject(AuthManager())
 }
