@@ -7,53 +7,103 @@
 import SwiftUI
 
 struct OptionsView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @State private var username: String = ""
+    @State private var friendCode: String = ""
+
     var body: some View {
         NavigationView {
-            List {
-                // General Settings
-                Section(header: Text("General").foregroundColor(Color("PrimaryPurple"))) {
-                    settingsButton(title: "Appearance", icon: "paintbrush")
-                    settingsButton(title: "Language", icon: "globe")
-                    settingsButton(title: "Storage & Data", icon: "externaldrive.fill")
-                }
+            VStack(spacing: 25) {
+                // MARK: - Profile Header
+                VStack(spacing: 8) {
+                    ZStack {
+                        Circle()
+                            .fill(colorScheme == .dark ? Color("PrimaryPurple") : Color.white)
+                            .frame(width: 90, height: 90)
+                            .shadow(radius: 5)
 
-                // Privacy & Security
-                Section(header: Text("Privacy & Security").foregroundColor(Color("PrimaryPurple"))) {
-                    settingsButton(title: "Permissions", icon: "hand.raised.fill")
-                    settingsButton(title: "Blocked Users", icon: "person.crop.circle.badge.xmark")
-                    settingsButton(title: "Security", icon: "lock.fill")
-                }
+                        Image("ProfileIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                    }
 
-                // Notifications
-                Section(header: Text("Notifications").foregroundColor(Color("PrimaryPurple"))) {
-                    settingsButton(title: "Push Notifications", icon: "bell.fill")
-                    settingsButton(title: "Email Notifications", icon: "envelope.open.fill")
-                }
+                    Text(username.isEmpty ? "Loading..." : username)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("PrimaryPurple"))
 
-                // Log Out Section
-                Section {
-                    LogoutView()
+                    Text(friendCode.isEmpty ? "" : "Friend Code: \(friendCode)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                .padding(.top, 50)
+
+                // MARK: - Settings List
+                List {
+                    Section(header: Text("General").foregroundColor(Color("PrimaryPurple"))) {
+                        settingsButton(title: "Appearance", icon: "paintbrush", colorScheme: colorScheme)
+                    }
+
+                    Section(header: Text("Privacy & Security").foregroundColor(Color("PrimaryPurple"))) {
+                        settingsButton(title: "Permissions", icon: "hand.raised.fill", colorScheme: colorScheme)
+                        settingsButton(title: "Blocked Users", icon: "person.crop.circle.badge.xmark", colorScheme: colorScheme)
+                    }
+
+                    Section(header: Text("Notifications").foregroundColor(Color("PrimaryPurple"))) {
+                        settingsButton(title: "Push Notifications", icon: "bell.fill", colorScheme: colorScheme)
+                    }
+
+                    Section {
+                        LogoutView()
+                    }
+                }
+                .scrollContentBackground(.hidden)
+                .background(colorScheme == .dark ? Color.black : Color.white)
+                .listStyle(.insetGrouped)
+            }
+            .background(colorScheme == .dark ? Color.black : Color.white)
+            .navigationTitle("Settings")
+            .onAppear {
+                FriendsApi.shared.fetchUserDetails { fetchedUsername, fetchedCode in
+                    DispatchQueue.main.async {
+                        self.username = fetchedUsername ?? ""
+                        self.friendCode = fetchedCode ?? ""
+                    }
                 }
             }
-            .navigationTitle("Settings")
-            .background(Color("SecondaryPurple").opacity(0.1).edgesIgnoringSafeArea(.all))
-            .scrollContentBackground(.hidden) // ✅ Ensures list background matches
         }
     }
 }
 
-// ✅ Extracted Button Style
-private func settingsButton(title: String, icon: String) -> some View {
-    Button(action: {}) {
-        HStack {
+
+// MARK: - Reusable Button
+private func settingsButton(title: String, icon: String, colorScheme: ColorScheme) -> some View {
+    Button(action: {
+        // Your action here
+    }) {
+        HStack(spacing: 6) {
             Image(systemName: icon)
-                .foregroundColor(Color("PrimaryPurple")) // ✅ Icon Color
+                .foregroundColor(colorScheme == .light ? .white : Color("PrimaryPurple"))
+
             Text(title)
-                .foregroundColor(Color("PrimaryPurple")) // ✅ Text Color
+                .foregroundColor(colorScheme == .light ? .white : .gray)
+
+            Spacer()
         }
+        .padding()
+        .background(
+            colorScheme == .light
+                ? Color("PrimaryPurple")
+                : Color(.systemGray5)
+        )
+        .cornerRadius(10)
     }
+    .buttonStyle(PlainButtonStyle()) // Keeps custom styling
 }
+
 
 #Preview {
     OptionsView()
+        .environment(\.colorScheme, .dark) // Toggle between .light or .dark
 }

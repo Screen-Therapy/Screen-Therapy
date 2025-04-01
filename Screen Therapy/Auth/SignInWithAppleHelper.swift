@@ -1,7 +1,6 @@
 import AuthenticationServices
 
 class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    let apiURL = "http://10.136.251.34:8080/"
 
     // Final result: .success means user is signed in and has a username
     func handleSignInResult(_ result: Result<ASAuthorization, Error>, completion: @escaping (Bool, Bool) -> Void) {
@@ -26,11 +25,7 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
                     } else {
                         print("🆕 New Apple user. Registering...")
                         self.registerUser(userId: userId, email: email) { success in
-                            if success {
-                                completion(true, false) // success, no username yet
-                            } else {
-                                completion(false, false)
-                            }
+                            completion(success, false)
                         }
                     }
                 }
@@ -44,9 +39,8 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
         }
     }
 
-    // Updated to new backend route
     func checkIfUserExists(userId: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "\(apiURL)apple/checkUser/\(userId)") else {
+        guard let url = URL(string: "\(API.Apple.checkUser)/\(userId)") else {
             completion(false)
             return
         }
@@ -67,7 +61,7 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
     }
 
     func checkIfUsernameExists(userId: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "\(apiURL)apple/checkUsername/\(userId)") else {
+        guard let url = URL(string: "\(API.Apple.checkUsername)/\(userId)") else {
             completion(false)
             return
         }
@@ -88,7 +82,7 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
     }
 
     func registerUser(userId: String, email: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "\(apiURL)apple/register") else {
+        guard let url = URL(string: API.Apple.register) else {
             completion(false)
             return
         }
@@ -123,7 +117,7 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
     }
 
     func saveUsername(userId: String, username: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "\(apiURL)apple/setUsername") else {
+        guard let url = URL(string: API.Apple.setUsername) else {
             completion(false)
             return
         }
@@ -159,7 +153,6 @@ class SignInWithAppleHelper: NSObject, ASAuthorizationControllerDelegate, ASAuth
         }.resume()
     }
 
-    
     // Required
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let windowScene = UIApplication.shared.connectedScenes
