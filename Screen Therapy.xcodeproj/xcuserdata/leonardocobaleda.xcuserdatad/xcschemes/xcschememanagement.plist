@@ -7,8 +7,12 @@
 		<key>Screen Therapy.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 			<integer>0</integer>
+=======
+			<integer>1</integer>
+>>>>>>> main
 		</dict>
 		<key>ScreenTherapyShield.xcscheme_^#shared#^_</key>
 		<dict>
@@ -23,6 +27,7 @@
 		<key>ShieldActionExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< Updated upstream
 			<integer>1</integer>
 =======
 			<integer>2</integer>

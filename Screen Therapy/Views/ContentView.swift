@@ -8,28 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = UIColor(named: "PrimaryPurple")
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .white
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
+        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray4
+        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray4]
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+
+    }
+
     var body: some View {
-        ZStack {
-            TabView {
-                AppsView()
-                    .tabItem {
-                        Label("Apps", systemImage: "app.fill")
-                    }
-                
-                ReportsView()
-                    .tabItem {
-                        Label("Report", systemImage: "chart.bar.fill")
-                    }
-                
-                OptionsView()
-                    .tabItem {
-                        Label("Options", systemImage: "gearshape.fill")
-                    }
-            }
-            .accentColor(Color("AccentPurple"))
+        TabView {
+            AppsView()
+                .tabItem {
+                    Image(systemName: "app.fill")
+                    Text("Apps")
+                }
+
+            ReportsView()
+                .tabItem {
+                    Image(systemName: "chart.bar.fill")
+                    Text("Report")
+                }
+
+            OptionsView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("Settings")
+                }
         }
+        .accentColor(.white) // Active tab icon and text color
     }
 }
+
 
 #Preview {
     ContentView()

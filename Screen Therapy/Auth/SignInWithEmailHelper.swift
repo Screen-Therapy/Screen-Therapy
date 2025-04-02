@@ -9,12 +9,11 @@ import Foundation
 import FirebaseAuth
 
 class SignInWithEmailHelper {
-    let apiURL = "http://10.136.251.34:8080"
-
+    
     func registerUser(userId: String, username: String, email: String, completion: @escaping (Bool) -> Void) {
         print("📤 Attempting to register user: \(username), email: \(email), userId: \(userId)")
 
-        guard let url = URL(string: "\(apiURL)/email/register") else {
+        guard let url = URL(string: API.Email.register) else {
             print("❌ Invalid URL")
             completion(false)
             return
@@ -56,54 +55,51 @@ class SignInWithEmailHelper {
         }.resume()
     }
 
-
-
     func loginUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
-          Auth.auth().signIn(withEmail: email, password: password) { result, error in
-              if let error = error {
-                  print("❌ Firebase sign-in failed: \(error.localizedDescription)")
-                  completion(false)
-                  return
-              }
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("❌ Firebase sign-in failed: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
 
-              guard let userId = result?.user.uid else {
-                  completion(false)
-                  return
-              }
+            guard let userId = result?.user.uid else {
+                completion(false)
+                return
+            }
 
-              self.verifyUserInBackend(userId: userId, completion: completion)
-          }
-      }
+            self.verifyUserInBackend(userId: userId, completion: completion)
+        }
+    }
 
-      private func verifyUserInBackend(userId: String, completion: @escaping (Bool) -> Void) {
-          guard let url = URL(string: "\(apiURL)email/login") else {
-              completion(false)
-              return
-          }
+    private func verifyUserInBackend(userId: String, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: API.Email.login) else {
+            completion(false)
+            return
+        }
 
-          var request = URLRequest(url: url)
-          request.httpMethod = "POST"
-          request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-          let body: [String: String] = ["userId": userId]
+        let body: [String: String] = ["userId": userId]
 
-          do {
-              request.httpBody = try JSONSerialization.data(withJSONObject: body)
-          } catch {
-              completion(false)
-              return
-          }
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(false)
+            return
+        }
 
-          URLSession.shared.dataTask(with: request) { _, response, error in
-              if let error = error {
-                  print("❌ Backend verification failed: \(error.localizedDescription)")
-                  completion(false)
-                  return
-              }
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("❌ Backend verification failed: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
 
-              let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-              completion(statusCode == 200)
-          }.resume()
-      }
-  }
-
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+            completion(statusCode == 200)
+        }.resume()
+    }
+}
