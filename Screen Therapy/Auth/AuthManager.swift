@@ -7,6 +7,8 @@
 
 import AuthenticationServices
 import Combine
+import FirebaseAuth
+
 
 class AuthManager: ObservableObject {
     @Published var isSignedIn: Bool = false
@@ -16,22 +18,27 @@ class AuthManager: ObservableObject {
     }
 
     func checkSignInStatus() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        
-        guard let userIdentifier = KeychainItem.currentUserIdentifier() else {
-            DispatchQueue.main.async {
-                self.isSignedIn = false
-            }
+        if let user = Auth.auth().currentUser {
+            // ✅ User is signed in with Firebase (email/password)
+            print("✅ Firebase email user is already signed in: \(user.uid)")
+            self.isSignedIn = true
             return
         }
 
-        appleIDProvider.getCredentialState(forUserID: userIdentifier) { credentialState, error in
+        // 👇 Fallback to Apple Sign-In if no Firebase user is found
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        guard let userIdentifier = KeychainItem.currentUserIdentifier() else {
+            self.isSignedIn = false
+            return
+        }
+
+        appleIDProvider.getCredentialState(forUserID: userIdentifier) { credentialState, _ in
             DispatchQueue.main.async {
                 switch credentialState {
                 case .authorized:
-                    self.isSignedIn = true  // ✅ User stays signed in
+                    self.isSignedIn = true
                 case .revoked, .notFound:
-                    self.isSignedIn = false // ❌ User must log in again
+                    self.isSignedIn = false
                     KeychainItem.deleteUserIdentifier()
                 default:
                     self.isSignedIn = false
@@ -39,4 +46,5 @@ class AuthManager: ObservableObject {
             }
         }
     }
+
 }

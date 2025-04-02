@@ -13,10 +13,14 @@ struct LogoutView: View {
 
     var body: some View {
         Button(action: {
-            // 🚫 Delete stored Apple ID from Keychain
+            // ❌ Clear Keychain
             KeychainItem.deleteUserIdentifier()
 
-            // 🚪 Set sign-in status to false
+            // ❌ Clear UserDefaults
+            UserDefaults.standard.removeObject(forKey: "username")
+            UserDefaults.standard.removeObject(forKey: "friendCode")
+
+            // ✅ Update auth state
             authManager.isSignedIn = false
         }) {
             HStack {
@@ -29,6 +33,7 @@ struct LogoutView: View {
         }
     }
 }
+
 
 
 #Preview {

@@ -107,7 +107,10 @@ struct OptionsView: View {
     // MARK: - Logout Button (Secondary Styling)
     private func logoutButton(colorScheme: ColorScheme) -> some View {
         Button(action: {
+            // Clear everything
             KeychainItem.deleteUserIdentifier()
+            UserDefaults.standard.removeObject(forKey: "username")
+            UserDefaults.standard.removeObject(forKey: "friendCode")
             authManager.isSignedIn = false
         }) {
             HStack(spacing: 6) {

@@ -12,13 +12,17 @@ class FriendsApi {
     static let shared = FriendsApi()
 
     func fetchUserDetails(completion: @escaping (String?, String?) -> Void) {
-        guard let userId = KeychainItem.currentUserIdentifier() else {
-                completion(nil, nil)
-                return
-            }
+        // Prefer Apple ID if available
+        let userId = KeychainItem.currentUserIdentifier() ?? Auth.auth().currentUser?.uid
 
+        guard let userId = userId else {
+            print("❌ No user ID found (Apple or Firebase)")
+            completion(nil, nil)
+            return
+        }
 
         guard let url = URL(string: API.Users.getUserById(userId)) else {
+            print("❌ Invalid URL")
             completion(nil, nil)
             return
         }
@@ -42,7 +46,6 @@ class FriendsApi {
                     print("⚠️ Response missing expected keys or not in expected format.")
                     completion(nil, nil)
                 }
-
             } catch {
                 print("❌ JSON parsing error: \(error.localizedDescription)")
                 completion(nil, nil)
@@ -50,5 +53,3 @@ class FriendsApi {
         }.resume()
     }
 }
-
-
