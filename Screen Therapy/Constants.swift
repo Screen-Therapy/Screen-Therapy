@@ -8,7 +8,7 @@
 import Foundation
 
 enum API {
-    static let baseURL = "http://10.136.153.119:8080"
+    static let baseURL = "http://10.136.128.111:8080"
 
     enum Apple {
         static let register = "\(baseURL)/apple/register"
@@ -35,6 +35,5 @@ enum API {
         static func getUserById(_ userId: String) -> String {
             return "\(baseURL)/user/info/\(userId)"
         }
-
     }
 }

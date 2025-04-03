@@ -25,7 +25,6 @@ struct ContentView: View {
             AppsView()
                 .tabItem {
                     Image(systemName: "app.fill")
-                    Text("Apps")
                 }
 
             ReportsView()
