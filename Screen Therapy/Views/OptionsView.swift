@@ -50,7 +50,7 @@ struct OptionsView: View {
                         settingsButton(title: "Permissions", icon: "hand.raised.fill", colorScheme: colorScheme)
                         settingsButton(title: "Blocked Users", icon: "person.crop.circle.badge.xmark", colorScheme: colorScheme)
                         settingsButton(title: "Push Notifications", icon: "bell.fill", colorScheme: colorScheme)
-                        logoutButton(colorScheme: colorScheme)
+                        LogoutButton()
                     }
                     .padding(.horizontal)
                     
@@ -107,30 +107,7 @@ struct OptionsView: View {
         .buttonStyle(PlainButtonStyle())
     }
 
-    // MARK: - Logout Button (Secondary Styling)
-    private func logoutButton(colorScheme: ColorScheme) -> some View {
-        Button(action: {
-            // Clear everything
-            KeychainItem.deleteUserIdentifier()
-            UserDefaults.standard.removeObject(forKey: "username")
-            UserDefaults.standard.removeObject(forKey: "friendCode")
-            authManager.isSignedIn = false
-        }) {
-            HStack(spacing: 6) {
-                Image(systemName: "arrow.backward.circle.fill")
-                    .foregroundColor(.white)
 
-                Text("Log Out")
-                    .foregroundColor(.white)
-
-                Spacer()
-            }
-            .padding()
-            .background(Color("SecondaryPurple"))
-            .cornerRadius(10)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
 }
 
 #Preview {

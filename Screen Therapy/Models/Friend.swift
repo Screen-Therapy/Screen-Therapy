@@ -5,7 +5,7 @@
 //  Created by Leonardo Cobaleda on 4/2/25.
 //
 
-struct Friend: Identifiable, Decodable {
+struct Friend: Identifiable, Decodable, Encodable {
     var userId: String
     var username: String
     

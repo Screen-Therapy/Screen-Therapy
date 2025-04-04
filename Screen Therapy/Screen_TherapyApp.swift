@@ -8,6 +8,7 @@ import AuthenticationServices
 @main
 struct Screen_TherapyApp: App {
     @StateObject private var authManager = AuthManager() // ✅ Keeps auth state across app relaunches
+    @StateObject var friendsCache = FriendsCache()
 
     init() {
         let tabBarAppearance = UITabBarAppearance()
@@ -20,6 +21,10 @@ struct Screen_TherapyApp: App {
     var body: some Scene {
         WindowGroup {
             RootView() // Uses AuthManager to decide view
+                .environmentObject(AuthManager())
+
+                .environmentObject(friendsCache)
+
         }
     }
 }

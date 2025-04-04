@@ -57,7 +57,8 @@ class FriendsApi {
     }
 
     func fetchFriends(completion: @escaping ([Friend]) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
+        let userId = KeychainItem.currentUserIdentifier() ?? Auth.auth().currentUser?.uid
+        guard let userId = userId else {
             print("❌ No userId found for fetchFriends")
             completion([])
             return
@@ -91,11 +92,13 @@ class FriendsApi {
     }
 
     func addFriend(friendCode: String, completion: @escaping (Bool) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
+        let userId = KeychainItem.currentUserIdentifier() ?? Auth.auth().currentUser?.uid
+        guard let userId = userId else {
             print("❌ No userId found for addFriend")
             completion(false)
             return
         }
+
 
         let urlString = API.Friends.addFriend
         print("📤 Sending add friend request to: \(urlString) with code: \(friendCode)")

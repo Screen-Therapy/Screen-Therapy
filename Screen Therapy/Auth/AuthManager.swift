@@ -11,12 +11,21 @@ import FirebaseAuth
 
 
 class AuthManager: ObservableObject {
-    @Published var isSignedIn: Bool = false
+    @Published var isSignedIn = false
+    @Published var hasFinishedSetup = false
 
     init() {
         checkSignInStatus() // Automatically check sign-in on app launch
     }
 
+    func completeSetupAfterAppleSignIn() {
+        // This is where you’d verify username, fetch profile, friends, etc.
+        // After everything’s loaded and ready:
+        DispatchQueue.main.async {
+            self.hasFinishedSetup = true
+            self.isSignedIn = true
+        }
+    }
     func checkSignInStatus() {
         if let user = Auth.auth().currentUser {
             // ✅ User is signed in with Firebase (email/password)
