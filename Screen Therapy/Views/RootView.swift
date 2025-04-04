@@ -9,14 +9,16 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var authManager = AuthManager() // Tracks authentication state
+    @EnvironmentObject var authManager: AuthManager // ✅ Use the one injected from App
+    @EnvironmentObject var friendsCache: FriendsCache
 
     var body: some View {
         Group {
             if authManager.isSignedIn {
-                ContentView().environmentObject(authManager) // ✅ Shows settings when signed in
+                ContentView()
+            
             } else {
-                WelcomeView().environmentObject(authManager) // ✅ Redirects to login
+                WelcomeView()
             }
         }
     }

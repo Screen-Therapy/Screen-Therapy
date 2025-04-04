@@ -102,7 +102,7 @@ struct SignUpView: View {
                                 DispatchQueue.main.async {
                                     if success {
                                         if hasUsername {
-                                            authManager.isSignedIn = true
+                                            authManager.completeSetupAfterAppleSignIn()
                                         } else {
                                             userId = KeychainItem.currentUserIdentifier() ?? ""
                                             showCompleteProfile = true
@@ -190,10 +190,13 @@ struct SignUpView: View {
             emailHelper.registerUser(userId: userId, username: username, email: email) { success in
                 DispatchQueue.main.async {
                     if success {
-                        authManager.isSignedIn = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            authManager.isSignedIn = true
+                        }
                     } else {
                         errorMessage = "Sign up failed. Try again."
                     }
+
                 }
             }
         }

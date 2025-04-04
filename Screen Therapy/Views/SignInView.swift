@@ -107,11 +107,12 @@ struct SignInView: View {
                                     DispatchQueue.main.async {
                                         if success {
                                             if hasUsername {
-                                                authManager.isSignedIn = true
+                                                authManager.completeSetupAfterAppleSignIn()
                                             } else {
                                                 userId = KeychainItem.currentUserIdentifier() ?? ""
                                                 showCompleteProfile = true
                                             }
+
                                         } else {
                                             errorMessage = "Apple Sign-In failed. Please try again."
                                         }

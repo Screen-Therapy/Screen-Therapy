@@ -19,6 +19,7 @@ struct ContentView: View {
         UITabBar.appearance().standardAppearance = tabBarAppearance
 
     }
+    
 
     var body: some View {
         TabView {
@@ -45,5 +46,6 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    ContentView().environmentObject(AuthManager()) // Pass mock AuthManager
+        .environmentObject(FriendsCache())
 }

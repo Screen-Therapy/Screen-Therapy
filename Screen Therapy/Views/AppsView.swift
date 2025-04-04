@@ -13,7 +13,9 @@ struct AppsView: View {
     @State private var showShieldSettings = false
     @State private var showAddFriendField = false
     @State private var friendCodeInput = ""
-    @State private var friends: [Friend] = []
+    @EnvironmentObject var friendsCache: FriendsCache
+    @EnvironmentObject var authManager: AuthManager
+
 
     var body: some View {
         NavigationView {
@@ -24,7 +26,7 @@ struct AppsView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color("PrimaryPurple"))
 
-                    // App picker
+                    // App Picker
                     Button(action: {
                         isPresented = true
                     }) {
@@ -58,25 +60,24 @@ struct AppsView: View {
                                 FriendsApi.shared.addFriend(friendCode: friendCodeInput) { success in
                                     DispatchQueue.main.async {
                                         if success {
-                                            FriendsApi.shared.fetchFriends { updatedList in
-                                                DispatchQueue.main.async {
-                                                    self.friends = updatedList
-                                                    friendCodeInput = ""
-                                                    showAddFriendField = false
+                                                
+                                                FriendsApi.shared.fetchFriends { updatedList in
+                                                    DispatchQueue.main.async {
+                                                        friendCodeInput = ""
+                                                        showAddFriendField = false
+                                                        friendsCache.updateCache(with: updatedList)
+                                                    }
                                                 }
-                                            }
+                                            
                                         } else {
                                             print("❌ Failed to add friend")
                                         }
                                     }
                                 }
                             }
-
                         }
 
-                
-
-                        FriendsListView(friends: friends)
+                        FriendsListView(friends: friendsCache.cachedFriends)
                     }
                 }
                 .padding()
@@ -87,10 +88,14 @@ struct AppsView: View {
                 ShieldSettingsView(familyActivityModel: familyActivityModel)
             }
             .onAppear {
-                FriendsApi.shared.fetchFriends { fetched in
-                    DispatchQueue.main.async {
-                        self.friends = fetched
-                    }
+                if friendsCache.cachedFriends.isEmpty {
+
+                        FriendsApi.shared.fetchFriends { fetched in
+                            DispatchQueue.main.async {
+                                friendsCache.updateCache(with: fetched)
+                            }
+                        }
+                    
                 }
             }
         }
@@ -99,4 +104,6 @@ struct AppsView: View {
 
 #Preview {
     AppsView()
+        .environmentObject(AuthManager())
+        .environmentObject(FriendsCache())
 }

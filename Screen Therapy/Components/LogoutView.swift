@@ -7,12 +7,25 @@
 
 
 import SwiftUI
+import FirebaseAuth
 
-struct LogoutView: View {
+struct LogoutButton: View {
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var friendsCache: FriendsCache
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         Button(action: {
+            print("🚪 Logging out...")
+
+            // ❌ Firebase sign-out
+            do {
+                try Auth.auth().signOut()
+                print("✅ Firebase user signed out.")
+            } catch {
+                print("❌ Failed to sign out of Firebase: \(error)")
+            }
+
             // ❌ Clear Keychain
             KeychainItem.deleteUserIdentifier()
 
@@ -20,22 +33,33 @@ struct LogoutView: View {
             UserDefaults.standard.removeObject(forKey: "username")
             UserDefaults.standard.removeObject(forKey: "friendCode")
 
+            // ❌ Clear cached friends
+            print("🧼 Clearing friend cache...")
+            friendsCache.clearCache()
+
             // ✅ Update auth state
             authManager.isSignedIn = false
         }) {
-            HStack {
-                Spacer()
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.backward.circle.fill")
+                    .foregroundColor(.white)
+
                 Text("Log Out")
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
                     .bold()
+
                 Spacer()
             }
+            .padding()
+            .background(Color("SecondaryPurple"))
+            .cornerRadius(10)
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
-
-
 #Preview {
-    LogoutView().environmentObject(AuthManager()) // Pass mock AuthManager
+    LogoutButton()
+        .environmentObject(AuthManager())
+        .environmentObject(FriendsCache())
 }

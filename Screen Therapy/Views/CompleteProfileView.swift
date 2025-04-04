@@ -5,6 +5,7 @@
 //  Created by Leonardo Cobaleda on 3/31/25.
 //
 import SwiftUI
+import Combine
 
 struct CompleteProfileView: View {
     @State private var username = ""
@@ -15,6 +16,7 @@ struct CompleteProfileView: View {
 
     @State private var errorMessage: String?
     @State private var navigateToMainApp = false
+    @State private var isSaving = false
 
     var body: some View {
         NavigationStack {
@@ -39,13 +41,24 @@ struct CompleteProfileView: View {
                             .cornerRadius(10)
                             .shadow(color: Color("SecondaryPurple").opacity(0.15), radius: 3, x: 0, y: 1)
                             .autocapitalization(.none)
+                            .onReceive(Just(username)) { _ in
+                                if let error = errorMessage, !error.isEmpty {
+                                    errorMessage = nil
+                                }
+                            }
+
+
 
                         Button(action: {
-                            if username.trimmingCharacters(in: .whitespaces).isEmpty {
+                            let trimmed = username.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                            if trimmed.isEmpty {
                                 errorMessage = "Please enter a username"
                             } else {
-                                SignInWithAppleHelper().saveUsername(userId: userId, username: username) { success in
+                                isSaving = true
+                                SignInWithAppleHelper().saveUsername(userId: userId, username: trimmed) { success in
                                     DispatchQueue.main.async {
+                                        isSaving = false
                                         if success {
                                             authManager.isSignedIn = true // 🔁 Triggers RootView switch
                                         } else {
@@ -53,20 +66,23 @@ struct CompleteProfileView: View {
                                         }
                                     }
                                 }
-
                             }
                         }) {
-                            Text("Continue")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color("PrimaryPurple"))
-                                .cornerRadius(10)
+                            if isSaving {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            } else {
+                                Text("Continue")
+                            }
                         }
-
-                        .disabled(username.trimmingCharacters(in: .whitespaces).isEmpty)
-                        .opacity(username.trimmingCharacters(in: .whitespaces).isEmpty ? 0.6 : 1)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("PrimaryPurple"))
+                        .cornerRadius(10)
+                        .disabled(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSaving)
+                        .opacity(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSaving ? 0.6 : 1)
 
                         if let error = errorMessage {
                             Text(error)
@@ -103,12 +119,9 @@ struct CompleteProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(.top, 10)
                 .padding(.leading, 16)
-
-        
             }
         }
     }
-
 }
 
 struct CompleteProfileView_Previews: PreviewProvider {
@@ -125,4 +138,3 @@ struct CompleteProfileView_Previews: PreviewProvider {
         }
     }
 }
-
