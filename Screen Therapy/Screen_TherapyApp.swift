@@ -11,10 +11,7 @@ struct Screen_TherapyApp: App {
     @StateObject var friendsCache = FriendsCache()
 
     init() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = UIColor(named: "AccentPurple2") // Custom color
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        TabBarAppearance.configure()
         FirebaseApp.configure()
     }
 

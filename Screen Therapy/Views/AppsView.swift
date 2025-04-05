@@ -18,7 +18,7 @@ struct AppsView: View {
 
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     Text("Screen Therapy")
@@ -27,10 +27,9 @@ struct AppsView: View {
                         .foregroundColor(Color("PrimaryPurple"))
 
                     // App Picker
-                    Button(action: {
-                        isPresented = true
-                    }) {
-                        Text("Select Apps to Discourage")
+                    // App Picker
+                    NavigationLink(destination: CreateShieldView(familyActivityModel: familyActivityModel)) {
+                        Text("+ Create App Shield")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -39,12 +38,8 @@ struct AppsView: View {
                             .cornerRadius(10)
                             .shadow(color: Color("SecondaryPurple").opacity(0.4), radius: 5, x: 0, y: 3)
                     }
-                    .familyActivityPicker(isPresented: $isPresented, selection: $familyActivityModel.selectionToDiscourage)
-                    .onChange(of: isPresented) { newValue in
-                        if !newValue && !familyActivityModel.selectionToDiscourage.applications.isEmpty {
-                            showShieldSettings = true
-                        }
-                    }
+
+
 
                     // Friends Section
                     VStack(alignment: .leading, spacing: 10) {
@@ -84,9 +79,6 @@ struct AppsView: View {
             }
             .background(Color("SecondaryPurple").opacity(0.1).edgesIgnoringSafeArea(.all))
             .navigationTitle("Apps")
-            .sheet(isPresented: $showShieldSettings) {
-                ShieldSettingsView(familyActivityModel: familyActivityModel)
-            }
             .onAppear {
                 if friendsCache.cachedFriends.isEmpty {
 
@@ -98,6 +90,7 @@ struct AppsView: View {
                     
                 }
             }
+
         }
     }
 }

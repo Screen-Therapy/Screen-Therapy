@@ -11,6 +11,7 @@ import FirebaseAuth
 
 
 class AuthManager: ObservableObject {
+    @Published var userId: String? = nil
     @Published var isSignedIn = false
     @Published var hasFinishedSetup = false
 
@@ -30,6 +31,7 @@ class AuthManager: ObservableObject {
         if let user = Auth.auth().currentUser {
             // ✅ User is signed in with Firebase (email/password)
             print("✅ Firebase email user is already signed in: \(user.uid)")
+            self.userId = user.uid // ✅ Save it here
             self.isSignedIn = true
             return
         }
@@ -45,6 +47,7 @@ class AuthManager: ObservableObject {
             DispatchQueue.main.async {
                 switch credentialState {
                 case .authorized:
+                    self.userId = userIdentifier //
                     self.isSignedIn = true
                 case .revoked, .notFound:
                     self.isSignedIn = false

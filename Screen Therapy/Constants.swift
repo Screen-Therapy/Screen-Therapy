@@ -8,7 +8,7 @@
 import Foundation
 
 enum API {
-    static let baseURL = "http://10.136.204.24:8080"
+    static let baseURL = "http://10.136.96.43:8080"
 
     enum Apple {
         static let register = "\(baseURL)/apple/register"
@@ -36,4 +36,10 @@ enum API {
             return "\(baseURL)/user/info/\(userId)"
         }
     }
+    
+    enum Shields {
+        static let create = "\(baseURL)/shields"
+        // you can later add .edit, .delete, .list, etc.
+    }
+
 }

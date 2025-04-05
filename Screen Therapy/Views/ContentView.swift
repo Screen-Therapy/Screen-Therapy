@@ -8,24 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    init() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = UIColor(named: "PrimaryPurple")
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .white
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray4
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray4]
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-
-    }
-    
-
     var body: some View {
         TabView {
             AppsView()
                 .tabItem {
                     Image(systemName: "app.fill")
+                    Text("Apps")
                 }
 
             ReportsView()
@@ -40,12 +28,13 @@ struct ContentView: View {
                     Text("Settings")
                 }
         }
-        .accentColor(.white) // Active tab icon and text color
+        .accentColor(.white) // Optional: sets selected tab icon/text color
     }
 }
 
-
 #Preview {
-    ContentView().environmentObject(AuthManager()) // Pass mock AuthManager
+    ContentView()
+        .environmentObject(AuthManager())
         .environmentObject(FriendsCache())
 }
+
